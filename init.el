@@ -12,7 +12,7 @@
 (set-fringe-mode 8)  ; Visual breathing room
 
 ;; -- TEXT ---
-(set-face-attribute 'default nil :font "Iosevka SS05" :height 170)
+(set-face-attribute 'default nil :font "Iosevka SS05" :height 166)
 
 ;; -- SANITY ---
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; Esc can now quit most dialogues
