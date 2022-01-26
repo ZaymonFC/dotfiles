@@ -163,6 +163,18 @@
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
+(use-package treemacs :defer t)
+
+(use-package treemacs-all-the-icons
+  :defer t
+  :config (treemacs-load-theme "all-the-icons"))
+
+(use-package treemacs-evil
+  :after (treemacs evil))
+
+(use-package treemacs-projectile
+  :after (treemacs))
+
 ;; -- UI ---
 (column-number-mode)
 (global-display-line-numbers-mode t)
