@@ -186,3 +186,52 @@
 		eshell-mode-hook
 		shell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode nil))))
+
+
+;; =============================================================================
+;; == DEVELOPMENT ===
+
+;; -- CLOJURE ---
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook ((clojure-mode . lsp)
+         (clojurec-mode . lsp)
+         (clojurescript-mode . lsp))
+  :config
+  ;; add paths to your local installation of project mgmt tools, like lein
+  ;; (setenv "PATH" (concat
+  ;;                  "/usr/local/bin" path-separator
+  ;;                  (getenv "PATH")))
+  (lsp-enable-which-key-integration t)
+
+  (dolist (m '(clojure-mode
+               clojurec-mode
+               clojurescript-mode
+               clojurex-mode))
+     (add-to-list 'lsp-language-id-configuration `(,m . "clojure"))))
+
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package company
+  :config
+  (global-company-mode))
+
+(use-package cider)
+
+;; == / DEVELOPMENT ===
+;; =============================================================================
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(which-key use-package unicode-fonts rainbow-delimiters magit lsp-ui ivy-rich helpful general exec-path-from-shell evil-collection doom-themes doom-modeline diminish counsel-projectile company cider)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
