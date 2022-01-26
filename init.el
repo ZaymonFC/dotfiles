@@ -135,6 +135,9 @@
   ;; Use to escape into normal mode when required
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
 
+  (global-display-line-numbers-mode t)
+  (setq display-line-numbers 'relative) ;; TODO: Check if this worked!
+
   ;; Use visual line motions even outside of visual line buffers
   ; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   ; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
@@ -177,8 +180,6 @@
 
 ;; -- UI ---
 (column-number-mode)
-(global-display-line-numbers-mode t)
-(setq display-line-numbers 'relative)
 
 ;; Disable line numbers for certain modes
 (dolist (mode '(org-mode-hook
@@ -213,15 +214,18 @@
                clojurex-mode))
      (add-to-list 'lsp-language-id-configuration `(,m . "clojure"))))
 
-(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ui
+  :commands lsp-ui-mode)
+
 (use-package company
-  :config
-  (global-company-mode))
+  :config (global-company-mode))
 
 (use-package cider)
 
 ;; == / DEVELOPMENT ===
 ;; =============================================================================
+
+;; Custom. Ignore this.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
