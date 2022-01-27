@@ -192,6 +192,12 @@
 ;; =============================================================================
 ;; == DEVELOPMENT ===
 
+;; -- PARENS ---
+(use-package smartparens
+  :config
+  (smartparens-global-mode 1)
+  (smartparens-global-strict-mode 1))
+
 ;; -- CLOJURE ---
 (use-package lsp-mode
   :ensure t
@@ -209,10 +215,10 @@
   (lsp-enable-which-key-integration t)
 
   (dolist (m '(clojure-mode
-               clojurec-mode
-               clojurescript-mode
-               clojurex-mode))
-     (add-to-list 'lsp-language-id-configuration `(,m . "clojure"))))
+	       clojurec-mode
+	       clojurescript-mode
+	       clojurex-mode))
+    (add-to-list 'lsp-language-id-configuration `(,m . "clojure"))))
 
 (use-package lsp-ui
   :commands lsp-ui-mode)
