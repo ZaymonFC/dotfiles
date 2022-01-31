@@ -1,3 +1,4 @@
+
 ;; -- UI SIMPLIFICATION ---
 
 ;; Remove the startup message
@@ -154,6 +155,9 @@
 
 ;; -- MAGIT ---
 (use-package magit)
+
+(use-package git-gutter-fringe
+  :config (git-gutter))
 
 ;; -- PROJECT MANAGEMENT 🔫 ---
 (use-package projectile
