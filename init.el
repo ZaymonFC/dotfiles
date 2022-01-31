@@ -18,6 +18,9 @@
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; Esc can now quit most dialogues
 (global-set-key (kbd "C-M-j") 'counsel-switch-buffer)
 
+(global-display-line-numbers-mode t)
+(menu-bar--display-line-numbers-mode-relative)
+
 ;; -- PACKAGE MANAGEMENT ---
 
 ;; Initialize package sources
@@ -46,7 +49,7 @@
 ;; -- PACKAGE SETUP ---
 (use-package diminish)
 
-;; Ivy, Counsel, Helpful. 
+;; Ivy, Counsel, Helpful.
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
 	 ("C-x b" . counsel-ibuffer)
@@ -138,20 +141,12 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+
   :config
   (evil-mode 1)
-
   ;; C-g is one of emacs escape modes
   ;; Use to escape into normal mode when required
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-
-  (global-display-line-numbers-mode t)
-  (setq display-line-numbers 'relative) ;; TODO: Check if this worked!
-
-  ;; Use visual line motions even outside of visual line buffers
-  ; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  ; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-  )
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state))
 
 ;; Contains various evil key mappings for different modes
 (use-package evil-collection
