@@ -93,6 +93,16 @@
   :config
   (setq which-key-idle-delay 0.5))
 
+;; --- GENERAL.EL 🎖 --
+(use-package general
+  :config
+  (general-create-definer zan/leader
+    :states '(normal insert emacs)
+    :prefix "C-SPC"
+    :global-prefix "C-SPC")
+  (zan/leader
+   "t" '(load-theme :whick-key "Load theme")))
+
 ;; - Doom Mode Line
 (use-package doom-modeline
   :ensure t
