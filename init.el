@@ -119,8 +119,6 @@
 (use-package all-the-icons
   :if (display-graphic-p))
 
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package unicode-fonts
    :ensure t
@@ -198,10 +196,14 @@
 ;; == DEVELOPMENT ===
 
 ;; -- PARENS ---
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 (use-package smartparens
+  :bind (([remap forward-sexp] . sp-forward-slurp-sexp)
+	 ([remap backward-sexp] . sp-forward-barf-sexp))
   :config
-  (smartparens-global-mode 1)
-  (smartparens-global-strict-mode 1))
+  (smartparens-global-mode 1))
 
 ;; -- CLOJURE ---
 (use-package lsp-mode
