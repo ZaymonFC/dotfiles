@@ -159,7 +159,11 @@
 (use-package magit)
 
 (use-package git-gutter-fringe
-  :config (git-gutter))
+  :config
+  (global-git-gutter-mode)
+  (fringe-helper-define 'git-gutter-fr:added '(center repeated) "XXXXXX..")
+  (fringe-helper-define 'git-gutter-fr:modified '(center repeated) "XXXXXX..")
+  (fringe-helper-define 'git-gutter-fr:deleted '(center repeated) "XXXXXX.."))
 
 ;; -- PROJECT MANAGEMENT 🔫 ---
 (use-package projectile
@@ -205,6 +209,7 @@
 
 (use-package flycheck
   :init (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
+        (setq flycheck-indication-mode 'right-fringe)
   :config (global-flycheck-mode))
 
 ;; -- PARENS ---
