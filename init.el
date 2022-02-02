@@ -1,3 +1,4 @@
+;;; Code:
 
 ;; -- UI SIMPLIFICATION ---
 
@@ -105,7 +106,8 @@
     :prefix "C-SPC"
     :global-prefix "C-SPC")
   (zan/leader
-   "t" '(load-theme :whick-key "Load theme")))
+    "t" '(load-theme :whick-key "Load theme")
+    "c e" '(lsp-treemacs-errors-list :which-key "List errors (lsp-treemacs)")))
 
 ;; - Doom Mode Line
 (use-package doom-modeline
@@ -236,7 +238,8 @@
 	       clojurex-mode))
     (add-to-list 'lsp-language-id-configuration `(,m . "clojure"))))
 
-(use-package lsp-treemacs)
+(use-package lsp-treemacs
+  :after (lsp-mode treemacs))
 
 (use-package lsp-ui
   :commands lsp-ui-mode)
@@ -244,7 +247,8 @@
 (use-package company
   :config (global-company-mode))
 
-(use-package cider)
+(use-package cider
+  :init (setq cider-repl-buffer-size-limit 250))
 
 ;; == / DEVELOPMENT ===
 ;; =============================================================================
@@ -266,3 +270,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(provide 'init)
+;;; init.el ends here
