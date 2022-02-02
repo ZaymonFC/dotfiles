@@ -218,7 +218,12 @@
 
 (use-package smartparens
   :bind (([remap forward-sexp] . sp-forward-slurp-sexp)
-	 ([remap backward-sexp] . sp-forward-barf-sexp))
+	 ([remap backward-sexp] . sp-forward-barf-sexp)
+	 ([forward-list] . sp-forward-sexp)
+	 ("C-M-b" . sp-backward-sexp)
+	 ("M-(" . sp-wrap-round)
+	 ("M-[" . sp-wrap-square)
+	 ("M-{" . sp-wrap-curly))
   :config
   (smartparens-global-mode 1))
 
