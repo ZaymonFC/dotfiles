@@ -176,6 +176,7 @@
   :config (counsel-projectile-mode))
 
 (use-package treemacs
+  :init (setq treemacs-is-never-other-window t) ; 'C-x o' no longer considers treemacs
   :defer t)
 
 (use-package treemacs-all-the-icons
