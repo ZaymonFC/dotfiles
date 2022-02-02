@@ -236,6 +236,8 @@
 	       clojurex-mode))
     (add-to-list 'lsp-language-id-configuration `(,m . "clojure"))))
 
+(use-package lsp-treemacs)
+
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
@@ -254,9 +256,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("3d54650e34fa27561eb81fc3ceed504970cc553cfd37f46e8a80ec32254a3ec3" "d47f868fd34613bd1fc11721fe055f26fd163426a299d45ce69bef1f109e1e71" "8d7b028e7b7843ae00498f68fad28f3c6258eda0650fe7e17bfb017d51d0e2a2" "b186688fbec5e00ee8683b9f2588523abdf2db40562839b2c5458fcfb322c8a4" "4b6b6b0a44a40f3586f0f641c25340718c7c626cbf163a78b5a399fbe0226659" "1f1b545575c81b967879a5dddc878783e6ebcca764e4916a270f9474215289e5" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "f91395598d4cb3e2ae6a2db8527ceb83fed79dbaf007f435de3e91e5bda485fb" default))
+   '("7a7b1d475b42c1a0b61f3b1d1225dd249ffa1abb1b7f726aec59ac7ca3bf4dae" "e2c926ced58e48afc87f4415af9b7f7b58e62ec792659fcb626e8cba674d2065" "3d54650e34fa27561eb81fc3ceed504970cc553cfd37f46e8a80ec32254a3ec3" "d47f868fd34613bd1fc11721fe055f26fd163426a299d45ce69bef1f109e1e71" "8d7b028e7b7843ae00498f68fad28f3c6258eda0650fe7e17bfb017d51d0e2a2" "b186688fbec5e00ee8683b9f2588523abdf2db40562839b2c5458fcfb322c8a4" "4b6b6b0a44a40f3586f0f641c25340718c7c626cbf163a78b5a399fbe0226659" "1f1b545575c81b967879a5dddc878783e6ebcca764e4916a270f9474215289e5" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "f91395598d4cb3e2ae6a2db8527ceb83fed79dbaf007f435de3e91e5bda485fb" default))
  '(package-selected-packages
-   '(git-gutter-fringe flycheck which-key use-package unicode-fonts rainbow-delimiters magit lsp-ui ivy-rich helpful general exec-path-from-shell evil-collection doom-themes doom-modeline diminish counsel-projectile company cider))
+   '(lsp-treemacs git-gutter-fringe flycheck which-key use-package unicode-fonts rainbow-delimiters magit lsp-ui ivy-rich helpful general exec-path-from-shell evil-collection doom-themes doom-modeline diminish counsel-projectile company cider))
  '(smartparens-global-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
