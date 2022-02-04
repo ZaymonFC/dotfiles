@@ -1,3 +1,7 @@
+;;; package --- Summary
+
+;;; Commentary:
+
 ;;; Code:
 
 ;; -- UI SIMPLIFICATION ---
@@ -82,6 +86,10 @@
 (use-package ivy-rich
   :init (ivy-rich-mode 1))
 
+(use-package all-the-icons-ivy-rich
+  :after (ivy ivy-rich)
+  :init (all-the-icons-ivy-rich-mode 1))
+
 (use-package helpful
   :custom
   (counsel-describe-function-function #'helpful-callable)
@@ -97,6 +105,35 @@
   :diminish which-key-mode
   :config
   (setq which-key-idle-delay 0.5))
+
+;; --- IVY - POS FRAME --
+(defun zan/ivy-posframe-get-size ()
+"Set the ivy-posframe size according to the current frame.
+This uses the ivy-posframe-height and ivy-posframe-width
+variables if they're set.  Otherwise it uses the default
+ivy variables or falls back to values I find sensible.
+
+Picks the smaller out of 'columns' or '%frame-width'."
+  (let ((height (or ivy-posframe-height (or ivy-height 10)))
+        (width (min (or ivy-posframe-width 170) (round (* .60 (frame-width))))))
+    (list :height height :width width :min-height height :min-width width)))
+
+(use-package ivy-posframe
+  :after (ivy)
+  :init
+  (setq ivy-posframe-border-width 1)
+  (setq ivy-posframe-size-function 'zan/ivy-posframe-get-size)
+
+  (setq ivy-posframe-display-functions-alist
+	'((swiper            . ivy-posframe-display-at-frame-bottom-center)
+	  (counsel-M-x       . ivy-posframe-display-at-frame-center)
+	  (counsel-find-file . ivy-posframe-display-at-frame-center)
+	  ;; Default
+	  (t                 . ivy-display-function-fallback)))
+
+  :custom-face (ivy-posframe-border ((t (:background "#51afef"))))
+
+  :config (ivy-posframe-mode 1))
 
 ;; --- GENERAL.EL 🎖 --
 (use-package general
@@ -161,9 +198,9 @@
 (use-package git-gutter-fringe
   :config
   (global-git-gutter-mode)
-  (fringe-helper-define 'git-gutter-fr:added '(center repeated) "XXXXXX..")
-  (fringe-helper-define 'git-gutter-fr:modified '(center repeated) "XXXXXX..")
-  (fringe-helper-define 'git-gutter-fr:deleted '(center repeated) "XXXXXX.."))
+  (fringe-helper-define 'git-gutter-fr:added '(center repeated) "XXX.....")
+  (fringe-helper-define 'git-gutter-fr:modified '(center repeated) "XXX.....")
+  (fringe-helper-define 'git-gutter-fr:deleted '(center repeated) "XXX....."))
 
 ;; -- PROJECT MANAGEMENT 🔫 ---
 (use-package projectile
@@ -206,7 +243,6 @@
 
 ;; =============================================================================
 ;; == DEVELOPMENT ===
-
 (use-package flycheck
   :init (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
         (setq flycheck-indication-mode 'right-fringe)
@@ -273,14 +309,14 @@
  '(custom-safe-themes
    '("7a7b1d475b42c1a0b61f3b1d1225dd249ffa1abb1b7f726aec59ac7ca3bf4dae" "e2c926ced58e48afc87f4415af9b7f7b58e62ec792659fcb626e8cba674d2065" "3d54650e34fa27561eb81fc3ceed504970cc553cfd37f46e8a80ec32254a3ec3" "d47f868fd34613bd1fc11721fe055f26fd163426a299d45ce69bef1f109e1e71" "8d7b028e7b7843ae00498f68fad28f3c6258eda0650fe7e17bfb017d51d0e2a2" "b186688fbec5e00ee8683b9f2588523abdf2db40562839b2c5458fcfb322c8a4" "4b6b6b0a44a40f3586f0f641c25340718c7c626cbf163a78b5a399fbe0226659" "1f1b545575c81b967879a5dddc878783e6ebcca764e4916a270f9474215289e5" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "f91395598d4cb3e2ae6a2db8527ceb83fed79dbaf007f435de3e91e5bda485fb" default))
  '(package-selected-packages
-   '(lsp-treemacs git-gutter-fringe flycheck which-key use-package unicode-fonts rainbow-delimiters magit lsp-ui ivy-rich helpful general exec-path-from-shell evil-collection doom-themes doom-modeline diminish counsel-projectile company cider))
+   '(simpleclip ivy-posframe all-the-icons-ivy-rich lsp-treemacs git-gutter-fringe flycheck which-key use-package unicode-fonts rainbow-delimiters magit lsp-ui ivy-rich helpful general exec-path-from-shell evil-collection doom-themes doom-modeline diminish counsel-projectile company cider))
  '(smartparens-global-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(ivy-posframe-border ((t (:background "#51afef")))))
 
 (provide 'init)
 ;;; init.el ends here
