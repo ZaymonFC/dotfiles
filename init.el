@@ -192,6 +192,12 @@ Picks the smaller out of 'columns' or '%frame-width'."
   :config
   (evil-collection-init))
 
+;; Segregate the internal `kill-ring` from the OSX-Clipboard.
+;; This stops evil-mode from yanking into the OS-Clipboard.
+(use-package simpleclip
+  :after (evil)
+  :config (simpleclip-mode 1))
+
 ;; -- MAGIT ---
 (use-package magit)
 
