@@ -107,6 +107,9 @@
   (setq which-key-idle-delay 0.5))
 
 ;; --- IVY - POS FRAME --
+(defvar ivy-posframe-height)
+(defvar ivy-posframe-width)
+
 (defun zan/ivy-posframe-get-size ()
 "Set the ivy-posframe size according to the current frame.
 This uses the ivy-posframe-height and ivy-posframe-width
@@ -228,6 +231,7 @@ Picks the smaller out of 'columns' or '%frame-width'."
 
 (use-package treemacs-all-the-icons
   :after (treemacs)
+  :commands treemacs-load-theme
   :config (treemacs-load-theme "all-the-icons"))
 
 (use-package treemacs-evil
@@ -250,6 +254,7 @@ Picks the smaller out of 'columns' or '%frame-width'."
 ;; =============================================================================
 ;; == DEVELOPMENT ===
 (use-package flycheck
+  :commands flycheck-display-error-messages-unless-error-list
   :init (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
         (setq flycheck-indication-mode 'right-fringe)
   :config (global-flycheck-mode))
@@ -272,7 +277,7 @@ Picks the smaller out of 'columns' or '%frame-width'."
 ;; -- CLOJURE ---
 (use-package lsp-mode
   :ensure t
-  :commands (lsp lsp-deferred)
+  :commands (lsp lsp-deferred lsp-enable-which-key-integration)
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((clojure-mode . lsp)
