@@ -190,7 +190,7 @@ Picks the smaller out of 'columns' or '%frame-width'."
     :prefix "C-SPC"
     :global-prefix "C-SPC")
   (zan/leader
-    "t" '(load-theme :whick-key "Load theme")
+    "t" '(load-theme :which-key "Load theme")
     "c e" '(lsp-treemacs-errors-list :which-key "List errors (lsp-treemacs)")))
 
 ;; -- THEME ---
