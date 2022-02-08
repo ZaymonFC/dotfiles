@@ -45,15 +45,47 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; -- ENVIRONMENT ---
+;; -- ENVIRONMENT AND SHELL ---
 (use-package exec-path-from-shell
   :ensure t
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-;; -- PACKAGE SETUP ---
+(use-package vterm)
+
+;; -- EMACS LIFECYCLE ---
+(use-package restart-emacs)
+
+; --- LINE | COL - NUMBERS --
+(column-number-mode)
+
+;; Disable line numbers for certain modes
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		eshell-mode-hook
+		vterm-mode
+		shell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode nil))))
+
+; --- CORE UI's --
 (use-package diminish)
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 15)))
+
+;; Note 1: This is required for doom-modeline
+;; Note 2: The first time you run this on your machine you will need
+;; to run the following command to setup fonts on the system
+;; M-x all-the-icons-install-fonts
+(use-package all-the-icons
+  :if (display-graphic-p))
+
+(use-package unicode-fonts
+   :ensure t
+   :config (unicode-fonts-setup))
 
 ;; Ivy, Counsel, Helpful.
 (use-package counsel
@@ -83,6 +115,7 @@
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 
+; --- DISCOVERABILITY 🕵️‍♀️ --
 (use-package ivy-rich
   :init (ivy-rich-mode 1))
 
@@ -105,6 +138,9 @@
   :diminish which-key-mode
   :config
   (setq which-key-idle-delay 0.5))
+
+(use-package google-this
+  :config (google-this-mode 1))
 
 ;; --- IVY - POS FRAME --
 (defvar ivy-posframe-height)
@@ -149,25 +185,6 @@ Picks the smaller out of 'columns' or '%frame-width'."
     "t" '(load-theme :whick-key "Load theme")
     "c e" '(lsp-treemacs-errors-list :which-key "List errors (lsp-treemacs)")))
 
-;; - Doom Mode Line
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 15)))
-
-;; Note 1: This is required for doom-modeline
-;; Note 2: The first time you run this on your machine you will need
-;; to run the following command to setup fonts on the system
-;; M-x all-the-icons-install-fonts
-(use-package all-the-icons
-  :if (display-graphic-p))
-
-
-(use-package unicode-fonts
-   :ensure t
-   :config
-    (unicode-fonts-setup))
-
 ;; -- THEME ---
 (use-package doom-themes
   :ensure t
@@ -176,6 +193,15 @@ Picks the smaller out of 'columns' or '%frame-width'."
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (load-theme 'doom-one t))
+
+;; -- DASHBOARD ---
+(use-package dashboard
+  :init
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-center-content t)
+  (setq dashboard-startup-banner "~/Projects/dotfiles/emacs-banner.txt")
+  :config (dashboard-setup-startup-hook))
 
 ;; -- D.R. E.V.I.L. 😈 ---
 (use-package evil
@@ -231,7 +257,6 @@ Picks the smaller out of 'columns' or '%frame-width'."
 
 (use-package treemacs-all-the-icons
   :after (treemacs)
-  :commands treemacs-load-theme
   :config (treemacs-load-theme "all-the-icons"))
 
 (use-package treemacs-evil
@@ -240,15 +265,6 @@ Picks the smaller out of 'columns' or '%frame-width'."
 (use-package treemacs-projectile
   :after (treemacs))
 
-;; -- UI ---
-(column-number-mode)
-
-;; Disable line numbers for certain modes
-(dolist (mode '(org-mode-hook
-		term-mode-hook
-		eshell-mode-hook
-		shell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode nil))))
 
 
 ;; =============================================================================
@@ -320,7 +336,7 @@ Picks the smaller out of 'columns' or '%frame-width'."
  '(custom-safe-themes
    '("7a7b1d475b42c1a0b61f3b1d1225dd249ffa1abb1b7f726aec59ac7ca3bf4dae" "e2c926ced58e48afc87f4415af9b7f7b58e62ec792659fcb626e8cba674d2065" "3d54650e34fa27561eb81fc3ceed504970cc553cfd37f46e8a80ec32254a3ec3" "d47f868fd34613bd1fc11721fe055f26fd163426a299d45ce69bef1f109e1e71" "8d7b028e7b7843ae00498f68fad28f3c6258eda0650fe7e17bfb017d51d0e2a2" "b186688fbec5e00ee8683b9f2588523abdf2db40562839b2c5458fcfb322c8a4" "4b6b6b0a44a40f3586f0f641c25340718c7c626cbf163a78b5a399fbe0226659" "1f1b545575c81b967879a5dddc878783e6ebcca764e4916a270f9474215289e5" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "f91395598d4cb3e2ae6a2db8527ceb83fed79dbaf007f435de3e91e5bda485fb" default))
  '(package-selected-packages
-   '(simpleclip ivy-posframe all-the-icons-ivy-rich lsp-treemacs git-gutter-fringe flycheck which-key use-package unicode-fonts rainbow-delimiters magit lsp-ui ivy-rich helpful general exec-path-from-shell evil-collection doom-themes doom-modeline diminish counsel-projectile company cider))
+   '(restart-emacs dashboard vterm google-this simpleclip ivy-posframe all-the-icons-ivy-rich lsp-treemacs git-gutter-fringe flycheck which-key use-package unicode-fonts rainbow-delimiters magit lsp-ui ivy-rich helpful general exec-path-from-shell evil-collection doom-themes doom-modeline diminish counsel-projectile company cider))
  '(smartparens-global-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
