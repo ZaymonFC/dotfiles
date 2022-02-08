@@ -1,8 +1,17 @@
-;;; package --- Summary
+;; package --- Summary
 
 ;;; Commentary:
 
 ;;; Code:
+
+;; -- HELPERS ---
+
+;; http://ergoemacs.org/emacs/elisp_read_file_content.html
+(defun read-lines (filePath)
+  "Return a list of lines of a file at filePath."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (split-string (buffer-string) "\n" t)))
 
 ;; -- UI SIMPLIFICATION ---
 
@@ -167,11 +176,10 @@ Picks the smaller out of 'columns' or '%frame-width'."
 	'((swiper            . ivy-posframe-display-at-frame-bottom-center)
 	  (counsel-M-x       . ivy-posframe-display-at-frame-center)
 	  (counsel-find-file . ivy-posframe-display-at-frame-center)
+	  (counsel-projectile-switch-project . ivy-posframe-display-at-frame-center)
 	  ;; Default
 	  (t                 . ivy-display-function-fallback)))
-
   :custom-face (ivy-posframe-border ((t (:background "#51afef"))))
-
   :config (ivy-posframe-mode 1))
 
 ;; --- GENERAL.EL 🎖 --
@@ -197,10 +205,24 @@ Picks the smaller out of 'columns' or '%frame-width'."
 ;; -- DASHBOARD ---
 (use-package dashboard
   :init
-  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-heading-icons nil)
   (setq dashboard-set-file-icons t)
   (setq dashboard-center-content t)
+
   (setq dashboard-startup-banner "~/Projects/dotfiles/emacs-banner.txt")
+  (setq dashboard-set-init-info t)
+
+  (setq dashboard-items '((recents  . 6)
+                        (projects . 5)
+                        (bookmarks . 5)))
+
+  (setq dashboard-footer-messages (read-lines "~/Projects/dotfiles/dashboard-quotes.txt"))
+  (setq dashboard-footer-icon (all-the-icons-octicon
+			        "law"
+				:height 1.1
+				:v-adjust 0
+				:face 'font-lock-keyword-face))
+
   :config (dashboard-setup-startup-hook))
 
 ;; -- D.R. E.V.I.L. 😈 ---

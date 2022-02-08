@@ -1,0 +1,14 @@
+“A computer once beat me at chess, but it was no match for me at kick boxing.” — Emo Philips
+“It’s hardware that makes a machine fast. It’s software that makes a fast machine slow.” — Craig Bruce
+“The greatest enemy of knowledge is not ignorance, it is the illusion of knowledge.” — Stephen Hawking
+“If you think your users are idiots, only idiots will use it.” — Linus Torvalds
+“Where is the ‘any’ key?” — Homer Simpson
+“Programs must be written for people to read, and only incidentally for machines to execute.” — Sussman
+“Before software should be reusable, it should be usable.” — Ralph Johnson
+“It is easier to change the specification to fit the program than vice versa.” — Alan Perlis
+“Code generation, like drinking alcohol, is good in moderation.” — Alex Lowe
+“I think it is inevitable that people program poorly ... We have to learn to live with it.” — Alan Perlis
+“In the future, computers may weigh no more than 1.5 tonnes.” — Popular mechanics, 1949
+“(On Lisp) ... the greatest single programming language ever designed.” — Alan Kay
+“The cheapest, fastest, and most reliable components are those that aren’t there.” — Gordon Bell
+“[In tech] ... not only do we not learn from our mistakes, but we also don’t learn from our successes.” — Keith Braithwaite
